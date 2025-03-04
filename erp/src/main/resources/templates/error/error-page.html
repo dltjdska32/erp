@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error - ${statusCode}</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8d7da;
+        color: #721c24;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        text-align: center;
+        padding: 50px;
+    }
+    .error-code {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+    .error-message {
+        font-size: 1.5rem;
+        margin: 20px 0;
+    }
+    .error-details {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    .back-link {
+        margin-top: 30px;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #343a40;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .back-link:hover {
+        background-color: #495057;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="error-code">${statusCode}</div>
+  <div class="error-message">${errorMessage}</div>
+  <div class="error-details">An unexpected error occurred. Please try again later.</div>
+  <a th:href="@{/}" class="back-link">Go to Home</a>
+</div>
+</body>
+</html>
