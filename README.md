@@ -12,9 +12,15 @@ https://www.youtube.com/watch?v=6ssCFEIZnbM
 
 **소리가 있으니 소리를 꺼주세요**
 
+<br>
+
 
 ## 👨‍🏫 프로젝트 소개
 SpringBoot, HTML, CSS, JS 를 활용한기업 그룹웨어 프로젝트
+
+<br>
+
+
 
 ## ⏲️ 개발 기간 
 - 24.10.03 ~ 24.12.03
@@ -23,10 +29,16 @@ SpringBoot, HTML, CSS, JS 를 활용한기업 그룹웨어 프로젝트
 - **이성남** : 프로젝트 총괄 및 DB 구축
 - **김동진** : 프론트엔드
 
+<br>
+
+
 ## 💻 개발환경
 - **Version** : Java 17
 - **IDE** : IntelliJ
 - **DataBase** : MySQL
+
+<br>
+
 
 ## 🛠️ 기술 스택
 
@@ -52,34 +64,58 @@ SpringBoot, HTML, CSS, JS 를 활용한기업 그룹웨어 프로젝트
 
 ---
 
+<br>
+
+
 
 
 ## 🏗️ 적용된 설계 패턴 및 기술
+
+<br>
+
 
 ### 1. 퍼사드 패턴 (Facade Pattern)
 복잡한 서비스 로직을 단순한 인터페이스로 제공
 - `BoardFacadeService`, `MailFacadeService`, `UserFacadeService`, `SalaryLogFacadeService`, `LeaveLogFacadeService`
 
+<br>
+
+
 ### 2. QueryDSL
 타입 안전한 동적 쿼리 작성 및 복잡한 조회 성능 최적화
 - Repository Custom 패턴으로 복잡한 조회 로직 분리
+
+<br>
+
 
 ### 3. 레코드 (Record)
 불변 DTO 객체로 데이터 전송
 - 24개 이상의 Record 클래스 사용 (`AddBonusInfo`, `AdminBonusInfoDto`, `EmployeeInfoDto` 등)
 
+<br>
+
+
 ### 4. 빌더 패턴 (Builder Pattern)
 Lombok `@Builder`를 활용한 객체 생성 패턴
 - 엔티티의 안전한 객체 생성 및 가독성 향상
+
+<br>
+
 
 ### 5. 데이터베이스 인덱스
 조회 성능 최적화를 위한 인덱스 적용
 - `Position`: `position_name` 인덱스
 - `Dept`: `dept_name` 인덱스
 
+<br>
+
+
 ### 6. Argument Resolver
 커스텀 어노테이션을 통한 세션 정보 주입
 - `@Login` 어노테이션으로 로그인 사용자 정보 자동 주입
+
+<br>
+
 
 ### 7. 인터셉터 (Interceptor)
 요청 전/후 공통 로직 처리
@@ -87,17 +123,26 @@ Lombok `@Builder`를 활용한 객체 생성 패턴
 - `LoginCheckInterceptor`: 로그인 상태 확인
 - `RoleCheckInterceptor`: 권한 체크
 
+<br>
+
+
 
 ### 8. 스케줄링
 `@Scheduled`를 활용한 정기 작업 실행
 - 매월 10일 9시: 급여 지급
 - 평일 6시: 근태 기록 초기화
 
+<br>
+
+
 ### 10. SSR (Server-Side Rendering)
 Thymeleaf를 활용한 서버 사이드 렌더링
 - 서버에서 HTML 생성 후 클라이언트에 전달
 
 ---
+
+<br>
+
 
 ## 📁 프로젝트 구조
 
@@ -119,6 +164,9 @@ src/main/java/com/example/erp/
 ```
 
 ---
+
+<br>
+
 
 ## 📦 주요 도메인 구조
 
