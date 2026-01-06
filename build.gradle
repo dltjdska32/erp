@@ -1,0 +1,112 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	JJWT_VERSION = "0.12.5"
+	WEBMVC_VERSION = "2.8.13"
+	QUERYDSL_VERSION = "5.0.0"
+	REDISSON_VERSION = "3.42.0"
+	BCPROV_VERSION = "1.82"
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${WEBMVC_VERSION}"
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation "org.redisson:redisson-spring-boot-starter:${REDISSON_VERSION}"
+
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
+
+	implementation "io.awspring.cloud:spring-cloud-aws-starter:3.4.0"
+	implementation "com.amazonaws:aws-java-sdk-s3:1.12.792"
+
+	implementation "org.bouncycastle:bcprov-jdk18on:${BCPROV_VERSION}"
+
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//runtimeOnly 'io.micrometer:micrometer-registry-influx'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation "io.jsonwebtoken:jjwt-api:${JJWT_VERSION}"
+	runtimeOnly "io.jsonwebtoken:jjwt-gson:${JJWT_VERSION}"
+	runtimeOnly "io.jsonwebtoken:jjwt-impl:${JJWT_VERSION}"
+
+	// Querydsl 추가
+	implementation "com.querydsl:querydsl-jpa:${QUERYDSL_VERSION}:jakarta"
+	annotationProcessor "com.querydsl:querydsl-apt:${QUERYDSL_VERSION}:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:mysql'
+	testImplementation "com.redis:testcontainers-redis:2.2.2"
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.projectlombok:lombok'
+
+	// 스프링배치
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+
+
+}
+
+
+/**
+ * querydsl 빌드 옵션
+ */
+/// 큐 객체 저장될 루트내용
+def querydslDir = layout.buildDirectory.dir("generated/querydsl").get().asFile
+sourceSets {
+	main.java.srcDirs += [querydslDir]
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+	options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
+}
+
+clean.doLast {
+	file(querydslDir).deleteDir()
+}
+
+
+clean {
+	delete file('src/main/generated')
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -39,4 +39,10 @@ out/
 application.yml
 application-test.yml
 /src/main/generated
+*.yml
 
+### .env ###
+*.env
+.env
+.env.local
+.env.*.local
